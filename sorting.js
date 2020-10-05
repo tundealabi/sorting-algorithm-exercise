@@ -65,34 +65,26 @@ function mergeSort(array) {
     return merge(lhsArray,rhsArray);
 }
 
-//Swapping array elements via ES6 array destructuring
-function swap(arr, x, y) {
-    [arr[x], arr[y]] = [arr[y], arr[x]];
-  }
-  
-  //Pivot function returns the fixed pivot point
-  function pivot(arr, left = 0, right = arr.length - 1) {
+function pivot (array,left=0,right=array.length-1) {
+    let pivotValue = array[left];
     let shift = left;
-    for (let i = left + 1; i <= right; i++) {
-      //Move all the small elements on the left side
-      if (arr[i] < arr[left]){
-          shift++;
-        swap(arr, i, shift);
-      } 
+    for(let i = left+1; i <= right; i++){
+        if(array[i] < pivotValue) {
+            shift++;
+            [array[shift],array[i]] = [array[i],array[shift]];  
+        }
     }
-  
-    //Finally swapping the last element with the left
-    swap(arr, left, shift);
+    [array[shift],array[left]] = [array[left],array[shift]];
     return shift;
-  }
-  
-  function quickSort(array, left = 0, right = array.length - 1) {
-    if (left < right) {
-      let pivotIndex = pivot(array, left, right);
-  
-      //Recusrively calling the function to the left of the pivot and to the right of the pivot
-      quickSort(array, left, pivotIndex - 1);
-      quickSort(array, pivotIndex + 1, right);
+}
+
+function quickSort(array,left=0,right=array.length-1) {
+    if(left < right) {
+    let pivotIndex = pivot(array,left,right);
+    quickSort(array,left,pivotIndex-1);
+    quickSort(array,pivotIndex+1,right);
     }
     return array;
-  }
+}
+
+
