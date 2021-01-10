@@ -51,7 +51,7 @@ function insertionSort(array) {
 
 function merge(arr1,arr2) {
     const arr = [...arr1,...arr2];
-  return bubbleSort(arr);
+  return arr.sort((a,b)=> a - b);
 }
 
 function mergeSort(array) {
